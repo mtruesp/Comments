@@ -2,7 +2,7 @@ import React from 'react'
 import Faker from 'faker'
 
 import Comments from '../Comments'
-import Header from '../header'
+import MyButton from '../MyButton'
 
 class App extends React.Component{
     constructor(){
@@ -10,26 +10,30 @@ class App extends React.Component{
         this.state = {
             comments: [],
             contador: 10,
-            comment: {
-                name: '',
-                comment: '',
-                avatar: ''
-            }
         }
         this.aumentar = this.aumentar.bind(this)
         this.disminuir = this.disminuir.bind(this)
         this.createComment = this.createComment.bind(this)
+        this.deleteComment = this.deleteComment.bind(this)
     }
 
     createComment(){
         let newComment = {
             name: `${Faker.name.firstName()} ${Faker.name.lastName()}`,
             comment: Faker.lorem.paragraph(),
-            avatar: Faker.image.avatar()
+            avatar: Faker.image.avatar(),
+            id: Faker.random.uuid()
         }
         let newArray = this.state.comments
         newArray.push(newComment)
         this.setState({comments: newArray})
+    }
+
+    deleteComment(id){
+        let copyComments = this.state.comments
+        let newComments = copyComments.filter((comment) => comment.id !== id)
+        let copyState = {...this.state, comments: newComments, contador: 0}
+        this.setState(copyState)
     }
 
     aumentar(){
@@ -45,9 +49,7 @@ class App extends React.Component{
     render(){
         return(
             <div>
-                <Header></Header>
-                {/* <Comments></Comments> */}
-                <button onClick={this.createComment}>Crear comentario</button> 
+                <MyButton text="Crear comentario" eventClick={this.createComment}/>
                 {
                     this.state.comments.map((comment) => {
                         return(
@@ -55,14 +57,14 @@ class App extends React.Component{
                                 name={comment.name}
                                 comment={comment.comment}
                                 avatar={comment.avatar}
+                                key={comment.id}
+                                id={comment.id}
+                                deleteComment={(id) => this.deleteComment(id)}
                             >
                             </Comments>
                         )
                     })
                 }
-                {/* <button onClick={this.aumentar}>Aumentar</button>
-                <button onClick={this.disminuir}>Disminuir</button>
-                <div>{this.state.contador}</div> */}
             </div>
         )
     }

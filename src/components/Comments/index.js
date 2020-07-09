@@ -1,15 +1,24 @@
 import React from 'react'
 import Faker from 'faker'
 
+import MyButton from '../MyButton'
+
 class Comments extends React.Component{
     constructor(){
         super()
-        this.state = {
-            name: `${Faker.name.firstName()} ${Faker.name.lastName()}`,
-            comment: Faker.lorem.paragraph(),
-            avatar: Faker.image.avatar()
-        }
         this.create = this.create.bind(this)
+    }
+
+    componentWillMount(){
+        console.log('componentWillMount')
+    }
+
+    componentDidMount(){
+        console.log('componentDidMount')
+    }
+
+    componentWillUnmount(){
+        console.log('Component Will Unmount')
     }
 
     create(){
@@ -39,6 +48,7 @@ class Comments extends React.Component{
                         </div>
                     </div>
                 </div>
+                <MyButton eventClick={() => this.props.deleteComment(this.props.id)} text="Borrar comentario"></MyButton>
             </div>
         )
     }
