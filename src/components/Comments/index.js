@@ -10,11 +10,11 @@ class Comments extends React.Component{
     }
 
     componentWillMount(){
-        console.log('componentWillMount')
+        console.log('Component Will Mount')
     }
 
     componentDidMount(){
-        console.log('componentDidMount')
+        console.log('Component Did Mount')
     }
 
     componentWillUnmount(){
