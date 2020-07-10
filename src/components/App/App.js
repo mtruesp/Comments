@@ -3,6 +3,7 @@ import Faker from 'faker'
 
 import Comments from '../Comments'
 import MyButton from '../MyButton'
+import InputComment from '../InputComment'
 
 class App extends React.Component{
     constructor(){
@@ -17,10 +18,10 @@ class App extends React.Component{
         this.deleteComment = this.deleteComment.bind(this)
     }
 
-    createComment(){
+    createComment(info){
         let newComment = {
-            name: `${Faker.name.firstName()} ${Faker.name.lastName()}`,
-            comment: Faker.lorem.paragraph(),
+            name: info.name,
+            comment: info.comment,
             avatar: Faker.image.avatar(),
             id: Faker.random.uuid()
         }
@@ -49,7 +50,7 @@ class App extends React.Component{
     render(){
         return(
             <div>
-                <MyButton text="Crear comentario" eventClick={this.createComment}/>
+                <InputComment createComment={this.createComment}/>
                 {
                     this.state.comments.map((comment) => {
                         return(

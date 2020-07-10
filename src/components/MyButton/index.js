@@ -1,12 +1,18 @@
 import React from 'react'
+import { Button } from 'react-bootstrap'
 
 class MyButton extends React.Component{
 
     render(){
         return(
-            <div>
-                <button onClick={this.props.eventClick}>{this.props.text}</button>
-            </div>
+            <Button 
+                variant="primary" 
+                size="lg" 
+                block
+                onClick={this.props.eventClick}
+            >
+                {this.props.text}
+            </Button>
         )
     }
 }
