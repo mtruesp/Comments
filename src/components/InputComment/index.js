@@ -51,6 +51,7 @@ class InputComment extends React.Component{
                     />
                 </Form.Group>
                 <MyButton text="Crear comentario" eventClick={this.handleSumbit}/>
+                <MyButton text="Fake comentario" eventClick={this.props.fakeComment}/>
             </Form> 
         )
     }
